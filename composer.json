@@ -1,0 +1,14 @@
+{
+  "name": "smn/treedatastructure",
+  "description": "Binary tree data structure",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Simone",
+      "email": "simone.esposito1986@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": { "smn\\cheapbinarytree\\": "src/" }
+  }
+}
