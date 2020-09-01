@@ -1,5 +1,5 @@
 {
-  "name": "smn/treedatastructure",
+  "name": "smn/cheapbinarytds",
   "description": "Binary tree data structure",
   "license": "MIT",
   "authors": [
@@ -9,6 +9,6 @@
     }
   ],
   "autoload": {
-    "psr-4": { "smn\\cheapbinarytree\\": "src/" }
+    "psr-4": { "smn\\cheapbinarytds\\": "src/" }
   }
 }
