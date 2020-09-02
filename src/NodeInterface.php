@@ -53,19 +53,18 @@ interface NodeInterface
 
 
     /**
-     * Return a NodeInterface instance of a child node with $name name. If $name doesn't exists, return false
-     * @param string $name
-     * @return NodeInterface|boolean
-     */
-    public function getChildInstance(string $name);
-
-
-    /**
      * Return true o false if a child exists
      * @param string $name Name of a child
      * @return bool
      */
     public function hasChild(string $name);
+
+    /**
+     * Return true or false if child instance exists
+     * @param NodeInterface $node
+     * @return mixed
+     */
+    public function hasChildInstance(NodeInterface $node);
 
 
     /**

@@ -18,9 +18,9 @@ class Node implements NodeInterface
     protected $value;
 
     /**
-     * @var NodeInterface
+     * @var ?NodeInterface
      */
-    protected NodeInterface $parent;
+    protected ?NodeInterface $parent = null;
 
     /**
      * @var NodeInterface[]
@@ -74,6 +74,7 @@ class Node implements NodeInterface
             throw new NodeException('Node already exists');
         }
         $this->children[$name] = $node;
+        $node->setParent($this);
     }
 
     /**
@@ -82,21 +83,11 @@ class Node implements NodeInterface
     public function getChild(string $name)
     {
         if (array_key_exists($name, $this->children)) {
-            return $this->children[$name]->getValue();
-        }
-        return false;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getChildInstance(string $name)
-    {
-        if (array_key_exists($name, $this->children)) {
             return $this->children[$name];
         }
         return false;
     }
+
 
     /**
      * @inheritDoc
@@ -131,11 +122,7 @@ class Node implements NodeInterface
      */
     public function getChildren()
     {
-        $children = [];
-        foreach($this->children as $node) {
-            $children[$node->getName()] = $node->getValue();
-        }
-        return $children;
+        return $this->children;
     }
 
     /**
@@ -143,7 +130,13 @@ class Node implements NodeInterface
      */
     public function setParent(NodeInterface $parent)
     {
+        if ($parent === $this->getParent()) {
+            return;
+        }
         $this->parent = $parent;
+        if ($parent->hasChildInstance($this) === false) {
+            $parent->addChildNode($this);
+        }
     }
 
     /**
@@ -159,11 +152,20 @@ class Node implements NodeInterface
      */
     public function getRootParent()
     {
-        // TODO: Implement getRootParent() method.
+        if ($this->getParent() !== null) {
+            return $this->parent->getParent();
+        }
+        return $this;
     }
 
     public function hasChild(string $name)
     {
         return array_key_exists($name, $this->children);
+    }
+
+    public function hasChildInstance(NodeInterface $node)
+    {
+        $name = $node->getName();
+        return $this->hasChild($name);
     }
 }
