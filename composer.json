@@ -2,6 +2,7 @@
   "name": "smn/cheapbinarytds",
   "description": "Binary tree data structure",
   "license": "MIT",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "Simone",
@@ -10,6 +11,9 @@
   ],
   "autoload": {
     "psr-4": { "smn\\cheapbinarytds\\": "src/" }
+  },
+  "require": {
+    "php": "^7.4"
   },
   "require-dev": {
     "phpunit/phpunit": "dev-master"
